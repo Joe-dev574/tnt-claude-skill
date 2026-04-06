@@ -140,6 +140,14 @@ Prefer Swift concurrency over Combine publishers. Use `async let` for parallel w
 .liquidGlass(tint: .blue, cornerRadius: 16) // tinted glass
 ```
 
+### Dynamic Type / Accessibility Fonts (REQUIRED)
+- **Always use dynamic text styles** for user-facing text: `.font(.body)`, `.font(.headline)`, `.font(.subheadline)`, `.font(.title2)`, `.font(.caption)`, etc.
+- To customize weight or design while keeping Dynamic Type: `.font(.system(.body, design: .rounded, weight: .semibold))`
+- **Never use `.font(.system(size: XX))`** for text the user reads — hardcoded sizes don't scale with the accessibility text size slider
+- Hardcoded sizes are only acceptable for: branded/decorative elements (share card renderer, onboarding hero text), SF Symbol icons sized to match a fixed frame, and watchOS views
+- Add `.minimumScaleFactor(0.7)` or `.lineLimit()` where layout constraints are tight at large text sizes
+- Apple requires text to scale by at least 200% for App Store approval (Accessibility guideline)
+
 ### Settings Row Pattern
 ```swift
 Button { action() } label: {
